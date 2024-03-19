@@ -14,7 +14,7 @@ def desktop_browser(request):
 
     browser.quit()
 
-@pytest.fixture(params=[(800, 400), (896, 414)])
+@pytest.fixture(params=[(400, 800), (414, 896)])
 def mobile_browser(request):
     width, height = request.param
     browser.config.window_width = width
