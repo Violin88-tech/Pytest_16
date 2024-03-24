@@ -11,24 +11,18 @@ def browser_manager(request):
     browser.config.window_width = width
     browser.config.window_height = height
 
-
-
-
 @pytest.mark.desktop
-def test_github_desktop(desktop_browser):
+def test_github_desktop(browser_manager):
     if browser.config.window_width <= 600:
-        pytest.skip('соотношение сторон десктопное')
+        pytest.skip('соотношение сторон мобильное')
     else:
         browser.open('/')
         browser.element('.HeaderMenu-link--sign-in').should(have.text('Sign in')).click()
 
-
-
-
 @pytest.mark.mobile
-def test_github_mobile(mobile_browser):
-     if browser.config.window_width <= 600:
-         pytest.skip('соотношение сторон мобильное')
+def test_github_mobile(browser_manager):
+     if browser.config.window_width > 600:
+         pytest.skip('соотношение сторон десктопное')
      else:
          browser.open('/')
          browser.element('.Button--link').click()
